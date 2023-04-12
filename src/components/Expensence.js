@@ -5,7 +5,7 @@ import Card from './Card' ;
 function Expensence(props) {
     const [title, setTitle] = useState(props.title); 
     const clickHandler = () => {
-       setTitle('props.title');
+       setTitle('Updated!!');
     }
     return (
         <Card className = "expense-item">

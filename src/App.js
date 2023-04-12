@@ -13,7 +13,7 @@ function App() {
 
   const [expenses, addNewExpense] = useState(Dummy_Node);
   
-  const [sorted, setSorted] = useState(expenses);
+  const [sorted, setSorted] = useState(expenses); 
 
   const filterFunction = (year) =>{
     const sortFunction = (item) => {
