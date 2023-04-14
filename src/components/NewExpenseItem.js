@@ -1,31 +1,26 @@
 import './NewExpenseItem.css';
-import Expensence from "./Expensence";
+import { useState } from 'react';
 import Card from './Card';
+import ExpensesList from './ExpensesList';
 import ExpenseFilter from './ExpenseFilter';
-
+import ExpensesChart from './ExpensesChart';
 function NewExpenseItem(props){
 
-    const selectDataHandler = (year) =>{
-      const selectedYear = year;
-      props.onFilter(selectedYear);
-    } 
-    let display = <p>Nothing to show.</p>;
-    console.log(props.item.length > 0);
-    if(props.item.length > 0){
-      display = props.item.map((expense) => (
-         <Expensence 
-          key = {expense.id}
-          title = {expense.title}
-          amount = {expense.amount}
-          date = {expense.date}
-          />
-      ));
-    }
+  const [filteredYear, setYear] = useState('2023');
+
+  const selectDataHandler = (year) =>{
+    setYear(year);
+  }   
+
+  const filteredExpenses = props.item.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+
     return(
     <Card className = 'expenses' >
-        <ExpenseFilter onSelectValue={selectDataHandler} />
-        
-        {display}
+        <ExpenseFilter selected = {filteredYear} onSelectValue={selectDataHandler} />
+        <ExpensesChart expenses = {filteredExpenses} />
+        <ExpensesList items = {filteredExpenses} />
        
     </Card>
         
